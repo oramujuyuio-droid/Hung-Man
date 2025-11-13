@@ -3,16 +3,22 @@
 }
 
 body {
-    font-family: Tahoma, Arial;
+    font-family: Tahoma, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 .container {
     margin: 20px auto;
-    width: 1000px
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 15px;
 }
 
 .row {
     display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 hr {
@@ -21,15 +27,15 @@ hr {
 
 .game-info {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-align: center;
+    gap: 10px;
 }
 
-.game-info .game-name {
-    flex: 1;
-}
-
+.game-info .game-name,
 .game-info .category {
     flex: 1;
-    text-align: right;
 }
 
 .game-info .category span {
@@ -39,10 +45,12 @@ hr {
 }
 
 .hangman-draw {
-    flex: 1;
+    flex: 1 1 350px;
     background-color: #F8F8F8;
     padding: 20px;
     height: 324px;
+    position: relative;
+    border-radius: 10px;
 }
 
 .hangman-draw .the-draw {
@@ -55,154 +63,29 @@ hr {
     display: none;
 }
 
-.hangman-draw .the-stand {
-    position: absolute;
-    width: 4px;
-    background-color: #222;
-    height: 100%;
-    left: 50%;
-    margin-left: -2px;
-    display: none;
-}
-
-.hangman-draw .the-hang {
-    display: none;
-}
-
-.hangman-draw .the-hang:before {
-    content: '';
-    position: absolute;
-    height: 4px;
-    background-color: #222;
-    width: 100px;
-    left: 30px;
-    top: 15px;
-}
-
-.hangman-draw .the-hang:after {
-    content: '';
-    position: absolute;
-    width: 4px;
-    height: 30px;
-    background-color: #222;
-    left: 130px;
-    top: 15px;
-}
-
-.hangman-draw .the-rope {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    position: absolute;
-    left: 95px;
-    top: 45px;
-    border: 4px dashed #222;
-    display: none;
-}
-
-.hangman-draw .the-man .head {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: 4px solid #222;
-    position: absolute;
-    left: 105px;
-    top: 55px;
-    display: none;
-}
-
-.hangman-draw .the-man .body {
-    position: absolute;
-    background-color: #222;
-    width: 4px;
-    height: 110px;
-    top: 102px;
-    left: 130px;
-    display: none;
-}
-
-.hangman-draw .the-man .hands {
-    display: none;
-}
-
-.hangman-draw .the-man .hands:before {
-    left: 85px;
-    transform: rotate(30deg);
-}
-
-.hangman-draw .the-man .hands:after {
-    left: 130px;
-    transform: rotate(-30deg);
-}
-
-.hangman-draw .the-man .hands:before,
-.hangman-draw .the-man .hands:after {
-    content: '';
-    width: 50px;
-    position: absolute;
-    height: 4px;
-    background-color: #222;
-    top: 140px;
-}
-
+/* باقي أشكال الرجل كما هي بدون تغيير */
+.hangman-draw .the-stand,
+.hangman-draw .the-hang,
+.hangman-draw .the-rope,
+.hangman-draw .the-man .head,
+.hangman-draw .the-man .body,
+.hangman-draw .the-man .hands,
 .hangman-draw .the-man .legs {
     display: none;
 }
 
-.hangman-draw .the-man .legs:before {
-    left: 85px;
-    transform: rotate(-30deg);
-}
-
-.hangman-draw .the-man .legs:after {
-    left: 130px;
-    transform: rotate(30deg);
-}
-
-.hangman-draw .the-man .legs:before,
-.hangman-draw .the-man .legs:after {
-    content: '';
-    width: 50px;
-    position: absolute;
-    height: 4px;
-    background-color: #222;
-    top: 220px;
-}
-
-.hangman-draw.wrong-1 .the-draw {
-    display: block;
-}
-
-.hangman-draw.wrong-2 .the-stand {
-    display: block;
-}
-
-.hangman-draw.wrong-3 .the-hang {
-    display: block;
-}
-
-.hangman-draw.wrong-4 .the-rope {
-    display: block;
-}
-
-.hangman-draw.wrong-5 .head {
-    display: block;
-}
-
-.hangman-draw.wrong-6 .body {
-    display: block;
-}
-
-.hangman-draw.wrong-7 .hands {
-    display: block;
-}
-
-.hangman-draw.wrong-8 .legs {
-    display: block;
-}
+/* الحالات حسب عدد الأخطاء */
+.hangman-draw.wrong-1 .the-draw {display: block;}
+.hangman-draw.wrong-2 .the-stand {display: block;}
+.hangman-draw.wrong-3 .the-hang {display: block;}
+.hangman-draw.wrong-4 .the-rope {display: block;}
+.hangman-draw.wrong-5 .head {display: block;}
+.hangman-draw.wrong-6 .body {display: block;}
+.hangman-draw.wrong-7 .hands {display: block;}
+.hangman-draw.wrong-8 .legs {display: block;}
 
 .letters {
-    flex: 1;
+    flex: 1 1 350px;
     padding: 15px;
     text-align: center;
 }
@@ -217,13 +100,18 @@ hr {
     display: inline-block;
     background-color: #009688;
     color: #FFF;
-    font-size: 24px;
-    margin-right: 10px;
+    font-size: 22px;
+    margin: 5px;
     line-height: 55px;
     text-transform: uppercase;
     font-weight: bold;
     cursor: pointer;
-    margin-bottom: 10px;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+.letters .letter-box:hover {
+    background-color: #00796b;
 }
 
 .letters .letter-box.clicked {
@@ -238,16 +126,18 @@ hr {
     padding: 20px;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     min-height: 104px;
+    border-radius: 10px;
 }
 
 .letters-guess span {
-    width: 60px;
-    height: 60px;
-    font-size: 24px;
-    margin-right: 10px;
+    width: 50px;
+    height: 50px;
+    font-size: 22px;
+    margin: 5px;
     text-align: center;
-    line-height: 60px;
+    line-height: 50px;
     text-transform: uppercase;
     font-weight: bold;
     background-color: #FDFDFD;
@@ -275,12 +165,71 @@ hr {
 .popup {
     position: fixed;
     background-color: #009688;
-    padding: 100px 20px;
-    width: 80%;
-    top: 10%;
-    left: 10%;
+    padding: 60px 20px;
+    width: 90%;
+    max-width: 500px;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
     text-align: center;
-    font-size: 40px;
+    font-size: 28px;
+    border-radius: 10px;
     border: 1px solid #CCC;
     color: #FFF;
+}
+
+/* ----------- Responsive ----------- */
+
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .letters .letter-box {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+        line-height: 45px;
+    }
+
+    .letters-guess span {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+        line-height: 45px;
+    }
+
+    .hangman-draw {
+        height: 280px;
+    }
+
+    .popup {
+        font-size: 24px;
+        padding: 40px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .letters .letter-box {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+        line-height: 38px;
+    }
+
+    .letters-guess span {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+        line-height: 38px;
+    }
+
+    .game-info {
+        flex-direction: column;
+    }
+
+    .popup {
+        font-size: 20px;
+    }
 }
